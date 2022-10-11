@@ -4,6 +4,7 @@ import styled from "styled-components";
 import RoundIconAvatar from "../atoms/RoundIconAvatar";
 import RankedIcon from "../atoms/RankIcon";
 import NumberIncrementRenderer from "../atoms/NumberIncremental";
+import usePrevious from "../../CustomHooks/usePreviousEffect";
 
 interface CardStyledInterface {
     type: string | undefined;
@@ -29,14 +30,15 @@ const ProfileContainer = styled.div`
 `
 
 function CardComponent(props: CardComponentInterface) {
+    const previousNumber = usePrevious(props.score);
     return (
-        <CardStyled data-flip-id={`flip-id-${props.userID}`} type={props.type}>
+        <CardStyled data-key={props.userID} key={props.userID} type={props.type}>
             <ProfileContainer>
                 <RankedIcon rank={props.rank} />
                 <RoundIconAvatar src={props.imageLink} rank={props.rank} />
                 <TextComponent text={props.text} />
             </ProfileContainer>
-            <NumberIncrementRenderer number={props.score} />
+            <NumberIncrementRenderer start={previousNumber} end={props.score} timer={50} />
         </CardStyled>
     )
 }
@@ -47,7 +49,7 @@ interface CardComponentInterface {
     text: string,
     rank: number,
     imageLink: string,
-    key?: number,
+    key?: number | string,
     type?: string,
     score: number,
     id?: string | number,
