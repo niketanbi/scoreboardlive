@@ -38,7 +38,7 @@ function CardComponent(props: CardComponentInterface) {
                 <RoundIconAvatar src={props.imageLink} rank={props.rank} />
                 <TextComponent text={props.text} />
             </ProfileContainer>
-            <NumberIncrementRenderer start={previousNumber} end={props.score} timer={50} />
+            <NumberIncrementRenderer start={previousNumber} end={props.score} timer={100} />
         </CardStyled>
     )
 }

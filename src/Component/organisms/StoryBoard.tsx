@@ -75,7 +75,7 @@ function StoryBoardComponent() {
     useEffect(() => {
         const setIntevalId = setInterval(() => {
             setUserData(randomScoreGenerator());
-        }, 5000);
+        }, 1000);
         return (() => { clearTimeout(setIntevalId); })
     }, []);
     return (
